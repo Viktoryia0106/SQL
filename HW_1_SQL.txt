@@ -1,0 +1,171 @@
+
+1. Show databases
+
+ mysql> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+
+2. Create databases
+   mysql> CREATE database students;
+Query OK, 1 row affected (4.45 sec)
+   mysql> CREATE database test;
+Query OK, 1 row affected (2.16 sec)
+
+3. Show databases
+
+ mysql> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| students           |
+| sys                |
+| test               |
++--------------------+
+
+4. Delete database
+
+   mysql> DROP database test;
+Query OK, 0 rows affected (4.28 sec)
+
+5. Show databases
+
+mysql> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| students           |
+| sys                |
++--------------------+
+
+6. Use database "students"
+
+mysql> USE students;
+Database changed
+
+7. Show tables
+
+mysql> SHOW tables;
+Empty set (0.57 sec)
+
+
+8. Create table
+
+mysql> CREATE table courses
+    -> (id INT(11) NOT NULL PRIMARY KEY,
+    -> faculty VARCHAR(55) NULL,
+    -> number INT(2) NULL);
+Query OK, 0 rows affected, 2 warnings (3.11 sec)
+
+9. Table description 
+
+mysql> DESC courses;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| faculty | varchar(55) | YES  |     | NULL    |       |
+| number  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+10.Insert values into table (Enter data into a table)
+
+mysql> INSERT INTO courses VALUES (1,"bio", 1);
+Query OK, 1 row affected (1.22 sec)
+
+mysql> INSERT INTO courses VALUES (2, "chem", 2);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO courses VALUES (3, "math", 3);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO courses VALUES (4, "geo", 4);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO courses VALUES (5, "gum", 5);
+Query OK, 1 row affected (2.52 sec)
+
+11.Show the table and see the values in it
+
+mysql> SELECT * FROM courses;
++----+---------+--------+
+| id | faculty | number |
++----+---------+--------+
+|  1 | bio     |      1 |
+|  2 | chem    |      2 |
+|  3 | math    |      3 |
+|  4 | geo     |      4 |
+|  5 | gum     |      5 |
++----+---------+--------+
+
+12.  Delete values from table
+
+mysql> DELETE FROM courses WHERE faculty="gum";
+Query OK, 1 row affected (0.82 sec)
+
+13. Check if a value has been deleted into a table
+
+mysql> SELECT * FROM courses;
++----+---------+--------+
+| id | faculty | number |
++----+---------+--------+
+|  1 | bio     |      1 |
+|  2 | chem    |      2 |
+|  3 | math    |      3 |
+|  4 | geo     |      4 |
++----+---------+--------+
+
+14. Change value in table
+
+mysql> UPDATE courses SET faculty="gum" WHERE faculty="geo";
+Query OK, 1 row affected (0.41 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+15. Check if a value has been updated into a table
+
+mysql> SELECT * FROM courses;
++----+---------+--------+
+| id | faculty | number |
++----+---------+--------+
+|  1 | bio     |      1 |
+|  2 | chem    |      2 |
+|  3 | math    |      3 |
+|  4 | gum     |      4 |
++----+---------+--------+
+
+16. Remove a column from the table
+
+mysql> ALTER TABLE courses DROP COLUMN id;
+Query OK, 4 rows affected (25.22 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+17.Add primary key back to table
+
+mysql> ALTER TABLE courses ADD COLUMN id INT AFTER number;
+Query OK, 0 rows affected (0.79 sec)
+
+18. Check if "id" was added to table
+
+mysql> SELECT * FROM courses;
++---------+--------+------+
+| faculty | number | id   |
++---------+--------+------+
+| bio     |      1 | NULL |
+| chem    |      2 | NULL |
+| math    |      3 | NULL |
+| gum     |      4 | NULL |
++---------+--------+------+
+
+

@@ -14,7 +14,6 @@ mysql> DESC Academy_of_music;
 | number  | int         | YES  |     | NULL    |       |
 | id      | int         | NO   | PRI | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
-3 rows in set (0.04 sec)
 
 3. Insert values into table (Enter data into a table)
 
@@ -45,7 +44,6 @@ mysql> SELECT * FROM Academy_of_music;
 | piano      |      4 |  4 |
 | vocals     |      1 |  5 |
 +------------+--------+----+
-5 rows in set (0.00 sec)
 
 5. Do not show duplicate fields
 
@@ -58,7 +56,6 @@ mysql> SELECT DISTINCT number FROM Academy_of_music;
 |      3 |
 |      4 |
 +--------+
-4 rows in set (0.46 sec)
 
 6. Show first 2 rows from table
 
@@ -69,7 +66,6 @@ mysql> SELECT * FROM Academy_of_music LIMIT 2;
 | folk    |      1 |  1 |
 | theory  |      2 |  2 |
 +---------+--------+----+
-2 rows in set (0.00 sec)
 
 7. Aliases. Temporarily change field name
 
@@ -83,4 +79,185 @@ mysql> SELECT number AS номер FROM Academy_of_music;
 |          4 |
 |          1 |
 +------------+
-5 rows in set (0.00 sec)
+
+8.a) Comparing or matching exact values
+
+mysql> SELECT faculty, number FROM Academy_of_music WHERE faculty = "folk";
++---------+--------+
+| faculty | number |
++---------+--------+
+| folk    |      1 |
++---------+--------+
+
+b) mysql> SELECT number FROM Academy_of_music WHERE number > 1;
++--------+
+| number |
++--------+
+|      2 |
+|      3 |
+|      4 |
++--------+
+
+9.Logical operations
+
+a) AND
+
+mysql> SELECT * FROM Academy_of_music WHERE number = 1 AND faculty = "folk";
++---------+--------+----+
+| faculty | number | id |
++---------+--------+----+
+| folk    |      1 |  1 |
++---------+--------+----+
+
+b) OR
+
+mysql> SELECT * FROM Academy_of_music WHERE number = 1 OR faculty = "vocals";
++---------+--------+----+
+| faculty | number | id |
++---------+--------+----+
+| folk    |      1 |  1 |
+| vocals  |      1 |  5 |
++---------+--------+----+
+
+10. Finding Similar Values
+
+a)
+
+mysql> SELECT faculty FROM Academy_of_music WHERE faculty LIKE "%s";
++---------+
+| faculty |
++---------+
+| vocals  |
++---------+
+
+b)
+
+mysql> SELECT faculty FROM Academy_of_music WHERE faculty LIKE "_o%";
++---------+
+| faculty |
++---------+
+| folk    |
+| vocals  |
++---------+
+
+11. Range
+
+mysql> SELECT * FROM Academy_of_music WHERE number BETWEEN 2 AND 4;
++------------+--------+----+
+| faculty    | number | id |
++------------+--------+----+
+| theory     |      2 |  2 |
+| percussion |      3 |  3 |
+| piano      |      4 |  4 |
++------------+--------+----+
+
+12. Show values that are not in the given range
+
+mysql> SELECT * FROM Academy_of_music WHERE NOT number BETWEEN 2 AND 4;
++---------+--------+----+
+| faculty | number | id |
++---------+--------+----+
+| folk    |      1 |  1 |
+| vocals  |      1 |  5 |
++---------+--------+----+
+
+13. Perfect hit
+
+mysql> SELECT * FROM Academy_of_music WHERE number IN (1,4);
++---------+--------+----+
+| faculty | number | id |
++---------+--------+----+
+| folk    |      1 |  1 |
+| piano   |      4 |  4 |
+| vocals  |      1 |  5 |
++---------+--------+----+
+
+14. Combining logic functions
+
+mysql> SELECT * FROM Academy_of_music WHERE (faculty = "folk" OR faculty = "vocals") AND number = 1;
++---------+--------+----+
+| faculty | number | id |
++---------+--------+----+
+| folk    |      1 |  1 |
+| vocals  |      1 |  5 |
++---------+--------+----+
+
+15. Sorting
+
+mysql> SELECT * FROM Academy_of_music ORDER BY faculty;
+a)
++------------+--------+----+
+| faculty    | number | id |
++------------+--------+----+
+| folk       |      1 |  1 |
+| percussion |      3 |  3 |
+| piano      |      4 |  4 |
+| theory     |      2 |  2 |
+| vocals     |      1 |  5 |
++------------+--------+----+
+
+16. Sort in reverse order
+
+mysql> SELECT * FROM Academy_of_music ORDER BY faculty DESC;
++------------+--------+----+
+| faculty    | number | id |
++------------+--------+----+
+| vocals     |      1 |  5 |
+| theory     |      2 |  2 |
+| piano      |      4 |  4 |
+| percussion |      3 |  3 |
+| folk       |      1 |  1 |
++------------+--------+----+
+
+17. Aggregate functions
+
+
+a) Calculate average
+
+mysql> SELECT AVG (number) FROM Academy_of_music;
++--------------+
+| AVG (number) |
++--------------+
+|       2.2000 |
++--------------+
+
+b) Calculate sum
+
+mysql> SELECT SUM(number) FROM Academy_of_music;
++-------------+
+| SUM(number) |
++-------------+
+|          11 |
++-------------+
+
+c) Find the minimum value in a field
+
+mysql> SELECT MIN(number) AS min_number FROM Academy_of_music;
++------------+
+| min_number |
++------------+
+|          1 |
++------------+
+
+18. Display records that are filled with values
+
+mysql> SELECT COUNT(faculty) FROM Academy_of_music;
++----------------+
+| COUNT(faculty) |
++----------------+
+|              5 |
++----------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

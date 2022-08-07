@@ -1,0 +1,86 @@
+1. Create the table
+
+mysql> CREATE TABLE Academy_of_music
+    -> (faculty VARCHAR(55) NULL, number INT(2) NULL, id INT(11) NOT NULL PRIMARY KEY);
+Query OK, 0 rows affected, 2 warnings (5.50 sec))
+
+2. Table description
+
+mysql> DESC Academy_of_music;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| faculty | varchar(55) | YES  |     | NULL    |       |
+| number  | int         | YES  |     | NULL    |       |
+| id      | int         | NO   | PRI | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+
+3. Insert values into table (Enter data into a table)
+
+mysql> INSERT INTO Academy_of_music VALUES("folk", 1, 1);
+Query OK, 1 row affected (1.10 sec)
+
+mysql> INSERT INTO Academy_of_music VALUES("theory", 2, 2);
+Query OK, 1 row affected (0.25 sec)
+
+mysql> INSERT INTO Academy_of_music VALUES("percussion", 3, 3);
+Query OK, 1 row affected (0.50 sec)
+
+mysql> INSERT INTO Academy_of_music VALUES("piano", 4, 4);
+Query OK, 1 row affected (0.46 sec)
+
+mysql> INSERT INTO Academy_of_music VALUES("vocals", 1, 5);
+Query OK, 1 row affected (0.13 sec)
+
+4.Show the table and see the values in it
+
+mysql> SELECT * FROM Academy_of_music;
++------------+--------+----+
+| faculty    | number | id |
++------------+--------+----+
+| folk       |      1 |  1 |
+| theory     |      2 |  2 |
+| percussion |      3 |  3 |
+| piano      |      4 |  4 |
+| vocals     |      1 |  5 |
++------------+--------+----+
+5 rows in set (0.00 sec)
+
+5. Do not show duplicate fields
+
+mysql> SELECT DISTINCT number FROM Academy_of_music;
++--------+
+| number |
++--------+
+|      1 |
+|      2 |
+|      3 |
+|      4 |
++--------+
+4 rows in set (0.46 sec)
+
+6. Show first 2 rows from table
+
+mysql> SELECT * FROM Academy_of_music LIMIT 2;
++---------+--------+----+
+| faculty | number | id |
++---------+--------+----+
+| folk    |      1 |  1 |
+| theory  |      2 |  2 |
++---------+--------+----+
+2 rows in set (0.00 sec)
+
+7. Aliases. Temporarily change field name
+
+mysql> SELECT number AS номер FROM Academy_of_music;
++------------+
+| номер      |
++------------+
+|          1 |
+|          2 |
+|          3 |
+|          4 |
+|          1 |
++------------+
+5 rows in set (0.00 sec)

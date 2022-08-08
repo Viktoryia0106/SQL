@@ -1,0 +1,80 @@
+1.Create 2 tables
+
+a)
++----+--------+--------+------+--------+
+| id | fname  | lname  | age  | gender |
++----+--------+--------+------+--------+
+|  1 | anna   | smith  |   18 | F      |
+|  2 | jhon   | smith  |   19 | NULL   |
+|  3 | nicole | stok   |   19 | F      |
+|  4 | alan   | po     |   21 | NULL   |
+|  5 | peter  | pen    |   24 | NULL   |
+|  6 | jack   | london |   27 | M      |
++----+--------+--------+------+--------+
+
+b)
++------------+--------+----+
+| faculty    | number | id |
++------------+--------+----+
+| folk       |      1 |  1 |
+| theory     |      2 |  2 |
+| percussion |      3 |  3 |
+| piano      |      4 |  4 |
+| vocals     |      1 |  5 |
++------------+--------+----+
+
+2. Merge 2 tables
+ 
+a) Inner JOIN
+
+mysql> SELECT Academy_of_music.faculty, general.fname, general.lname FROM Academy_of_music JOIN general ON Academy_of_music.id = general.id;
++------------+--------+-------+
+| faculty    | fname  | lname |
++------------+--------+-------+
+| folk       | anna   | smith |
+| theory     | jhon   | smith |
+| percussion | nicole | stok  |
+| piano      | alan   | po    |
+| vocals     | peter  | pen   |
++------------+--------+-------+
+
+b) Left JOIN
+
+mysql> SELECT Academy_of_music.number, general.fname, general.gender FROM Academy_of_music LEFT JOIN general ON Academy_of_music.id = general.id;
++--------+--------+--------+
+| number | fname  | gender |
++--------+--------+--------+
+|      1 | anna   | F      |
+|      2 | jhon   | NULL   |
+|      3 | nicole | F      |
+|      4 | alan   | NULL   |
+|      1 | peter  | NULL   |
+|      4 | NULL   | NULL   |
++--------+--------+--------+
+
+c) Right JOIN
+
+mysql> SELECT Academy_of_music.id, general.lname, general.gender, Academy_of_music.faculty
+-> FROM Academy_of_music RIGHT JOIN general ON Academy_of_music.id=general.id;
++------+--------+--------+------------+
+| id   | lname  | gender | faculty    |
++------+--------+--------+------------+
+|    1 | smith  | F      | folk       |
+|    2 | smith  | NULL   | theory     |
+|    3 | stok   | F      | percussion |
+|    4 | po     | NULL   | piano      |
+|    5 | pen    | NULL   | vocals     |
+| NULL | london | M      | NULL       |
++------+--------+--------+------------+
+
+
+3. Request with two selects
+
+mysql> SELECT fname,lname,gender,id FROM general WHERE age IN (SELECT age FROM general WHERE id>1 AND age >=21);
++-------+--------+--------+----+
+| fname | lname  | gender | id |
++-------+--------+--------+----+
+| alan  | po     | NULL   |  4 |
+| peter | pen    | NULL   |  5 |
+| jack  | london | M      |  6 |
++-------+--------+--------+----+
